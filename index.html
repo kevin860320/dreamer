@@ -124,7 +124,7 @@
 
         <h2 class ="sub_title"><font color="#003364">賽事預告</font></h2>
         
-          <el-card class="box-card">
+          <el-card class="box-card" style="min-height: 275px">
             <el-row></el-row>
             <el-col class ="el-col el-col-10 el-col-xs-10 el-col-sm-10 el-col-lg-10 ">
               <h3 class ="title" style ="text-align: center"><font color="#003364">{{nextTeam}}</font></h2>
@@ -139,7 +139,7 @@
             <el-row></el-row>
 
             <el-col class ="el-col">
-              <h2 class ="font" style ="text-align: center">陽明棒球場<br>{{nextDate}} {{nextTime}}</h2>
+              <h2 class ="font" style ="text-align: center">{{nextField}}棒球場<br>{{nextDate}} {{nextTime}}</h2>
             </el-col>
 
             <el-row></el-row>
@@ -153,7 +153,7 @@
         
         <h2 class ="sub_title"><font color="#003364">最近賽事</font></h2>
 
-          <el-card class="box-card">
+          <el-card class="box-card" style="min-height: 275px">
             <el-row></el-row>
             <el-col class ="el-col el-col-9 el-col-xs-9 el-col-sm-9 el-col-lg-9 ">
               <h3 class ="title" style ="text-align: center"><font color="#003364">{{lastTeam}}</font></h3>
@@ -168,7 +168,7 @@
             <el-row></el-row>
 
             <el-col class ="el-col">
-              <h2 class ="font" style ="text-align: center">陽明棒球場<br>{{lastDate}}</h2>
+              <h2 class ="font" style ="text-align: center">{{lastField}}棒球場<br>{{lastDate}}</h2>
             </el-col>
 
             <el-row></el-row>
@@ -367,12 +367,13 @@
         nextTeam: '',         
         nextDate: '',
         nextTime: '',
+        nextField:'',
 
         lastTeam:'',
         competitorScore:'',
         ourScore:'',
-        lastDate:''
-
+        lastDate:'',
+        lastField:'',
     
       };
 
@@ -546,16 +547,21 @@
           if(teamScore[i].date > new Date()){
             markDate = i
             break;
+          }else{
+            markDate = teamScore.length
           }
         }
         console.log(markDate)
-        this.nextTeam = teamScore[markDate].team
-        this.nextDate = (teamScore[markDate].date).getMonth()+1 +'/'+(teamScore[markDate].date).getDate()
-        this.nextTime = teamScore[markDate].time
         this.lastTeam = teamScore[markDate-1].team
         this.competitorScore = teamScore[markDate-1].competitorScore
         this.ourScore = teamScore[markDate-1].ourScore
         this.lastDate = (teamScore[markDate-1].date).getMonth()+1 +'/'+(teamScore[markDate-1].date).getDate()
+        this.lastField = teamScore[markDate-1].field
+
+        this.nextTeam = teamScore[markDate].team
+        this.nextDate = (teamScore[markDate].date).getMonth()+1 +'/'+(teamScore[markDate].date).getDate()
+        this.nextTime = teamScore[markDate].time
+        this.nextField = teamScore[markDate].field
       })
       .catch( (err) => {
         console.log(err);

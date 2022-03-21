@@ -273,8 +273,11 @@
           if(calendar[i].date > new Date()){
             markDate = i
             break;
+          }else{
+            markDate = calendar.length
           }
         }
+        console.log(markDate)
 
         //已完賽----
         for(i=0;i<markDate;i++){
